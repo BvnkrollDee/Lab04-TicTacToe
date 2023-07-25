@@ -46,8 +46,28 @@ class Program
             displayBoard();
             string selectedSlot = Console.ReadLine();
 
+            // Check if slot has already been selected
+            bool isValid = SelectionIsValid(selectedSlot);
+
+            if(isValid)
+            {
+                int[] indexes = SelectionToIndexes(selectedSlot);
+                int row = indexes[0];
+                int column = indexes[1];
+                Board[row][column] = currentPlayer.Marker;
+            }
+            else {
+                continue;
+            }
+
             if(selectedSlot == "1")
             {
+                string slotValue = Board[0][0];
+                if (slotValue == "X" || slotValue == "O")
+                {
+                    Console.WriteLine("invalid selection");
+                    continue;
+                }
                 Board[0][0] = currentPlayer.Marker;
             }
             else if (selectedSlot == "2")
@@ -100,7 +120,133 @@ class Program
         Console.WriteLine("|{0}||{1}||{2}|", Board[2][0], Board[2][1], Board[2][2]);
     }
 
+    static int[] SelectionToIndexes(string selectedSlot)
+    {
+        int[] indexes = new int[2];
+        switch(selectedSlot)
+        {
+            case "1":
+                indexes[0] = 0;
+                indexes[1] = 0;
+                break;
+            case "2":
+                indexes[0] = 0;
+                indexes[1] = 1;
+                break;
+            case "3":
+                indexes[0] = 0;
+                indexes[1] = 2;
+                break;
+            case "4":
+                indexes[0] = 1;
+                indexes[1] = 0;
+                break;
+            case "5":
+                indexes[0] = 1;
+                indexes[1] = 1;
+                break;
+            case "6":
+                indexes[0] = 1;
+                indexes[1] = 2;
+                break;
+            case "7":
+                indexes[0] = 2;
+                indexes[1] = 0;
+                break;
+            case "8":
+                indexes[0] = 2;
+                indexes[1] = 1;
+                break;
+            case "9":
+                indexes[0] = 2;
+                indexes[1] = 2;
+                break;
+        }
+        return indexes;
 
+    }
+
+    static bool SelectionIsValid(string selectedSlot)
+    {
+        bool isValid = true;
+        int[] indexes = SelectionToIndexes(selectedSlot);
+        int row = indexes[0];
+        int column = indexes[1];
+        string slotValue = Board[row][column];
+        if(selectedSlot == "1")
+        {
+             slotValue = Board[0][0];
+            if(slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "2")
+        {
+            slotValue = Board[0][1];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "3")
+        {
+            slotValue = Board[0][2];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "4")
+        {
+            slotValue = Board[1][0];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "5")
+        {
+            slotValue = Board[1][1];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "6")
+        {
+            slotValue = Board[1][2];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "7")
+        {
+            slotValue = Board[2][0];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "8")
+        {
+            slotValue = Board[2][1];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        else if (selectedSlot == "9")
+        {
+            slotValue = Board[2][2];
+            if (slotValue == "X" || slotValue == "O")
+            {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
 
 
 }
